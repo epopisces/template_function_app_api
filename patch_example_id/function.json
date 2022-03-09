@@ -1,0 +1,9 @@
+{
+    "stuff": "stuff",
+    "bindings": [
+        {
+            "stuff": "stuff",
+            "route": "<thing>/{id}"
+        }
+    ]
+}

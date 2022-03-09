@@ -19,6 +19,9 @@ def main(req: HttpRequest) -> HttpResponse:
 
     logging.info(f'[START] GET /<thing>')
 
+    #region #*----- Actions on Database                     ------------------------------
+    #* generate prepared SQL statements
+    #*------------------------------------------------------------------------------------
     try:
         results = []
 
@@ -47,3 +50,5 @@ def main(req: HttpRequest) -> HttpResponse:
     except:
         logging.info(f'[ERROR] GET /<thing>')
         return HttpResponse(u"API Error", status_code=500)
+
+    #endregion

@@ -20,6 +20,10 @@ def main(req: HttpRequest) -> HttpResponse:
     id = req.route_params.get('example_param')
     logging.info(f'[START] DELETE /<thing>/{id}')
 
+
+    #region #*----- Actions on Database                     ------------------------------
+    #* generate prepared SQL statements, w/qmark placeholders preventing SQL injection
+    #*------------------------------------------------------------------------------------
     try:
         results = []
 
@@ -33,7 +37,7 @@ def main(req: HttpRequest) -> HttpResponse:
 
             with conn.cursor() as cursor:
                 try:
-                    # qmark placeholders are the only ones supported by pyodbc, no named queries :-(
+                    # qmark is only placeholder type pyodbc supports (no named queries)
                     cursor.execute("DELETE FROM <table> WHERE <field> = ?", id)
                     cursor.commit()
 
@@ -47,3 +51,5 @@ def main(req: HttpRequest) -> HttpResponse:
     except:
         logging.info(f'[ERROR] DELETE /<thing>/{id}')
         return HttpResponse(u"API Error", status_code=500)
+
+    #endregion

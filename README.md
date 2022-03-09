@@ -7,6 +7,11 @@ graph LR
     C[Use Azure Functions Core Tools to generate the framework for the API]-->D[Modify to suit use case]-->E[Deploy to Azure Function App]
 ```
 
+# Assumptions
+* DB is a MySQL DB
+* Function App has an MSI
+    * The MSI is in an AD group with access to the MySQL DB
+
 # Planned Features
 
 GET and DELETE could be modified to function on any field, not just id.  Would involve something more like `GET <thing>/id=1` instead of `GET <thing>/1`

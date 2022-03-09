@@ -21,6 +21,9 @@ def main(req: HttpRequest) -> HttpResponse:
     id = req.route_params.get('id')
     logging.info(f'[START] GET /<thing>/{id}')
 
+    #region #*----- Actions on Database                     ------------------------------
+    #* generate prepared SQL statements, w/qmark placeholders preventing SQL injection
+    #*------------------------------------------------------------------------------------
     try:
         results = []
 
@@ -34,7 +37,7 @@ def main(req: HttpRequest) -> HttpResponse:
 
             with conn.cursor() as cursor:
                 try:
-                    # qmark placeholders are the only ones supported by pyodbc, no named queries :-(
+                    # qmark is only placeholder type pyodbc supports (no named queries)
                     cursor.execute("SELECT * FROM <table> WHERE <field> = ?", id)
                     columns = [column[0] for column in cursor.description]
                     for row in cursor.fetchall():
@@ -50,3 +53,5 @@ def main(req: HttpRequest) -> HttpResponse:
     except:
         logging.info(f'[ERROR] GET /<thing>/{id}')
         return HttpResponse(u"API Error", status_code=500)
+
+    #endregion
