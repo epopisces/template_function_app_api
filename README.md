@@ -11,6 +11,7 @@ graph LR
 * DB is a MySQL DB
 * Function App has an MSI
     * The MSI is in an AD group with access to the MySQL DB
+* Models exist, and not just models but two for each: {Thing} and {ThingNew} for the differing requirements of each
 
 # Planned Features
 
